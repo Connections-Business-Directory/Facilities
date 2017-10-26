@@ -394,6 +394,7 @@ HEREDOC;
 					}
 				}
 
+				$atts['link'] = FALSE;
 				if ( $atts['link'] ) {
 
 					$rel = is_object( $wp_rewrite ) && $wp_rewrite->using_permalinks() ? 'rel="category tag"' : 'rel="category"';

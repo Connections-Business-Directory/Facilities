@@ -11,7 +11,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Connections Business Directory Facilities
- * Plugin URI:        http://connections-pro.com
+ * Plugin URI:        https://connections-pro.com/documentation/facilities/
  * Description:       An extension for the Connections Business Directory plugin which adds the ability to add and assign facilities to your business directory entries.
  * Version:           1.0
  * Author:            Steven A. Zahm

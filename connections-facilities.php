@@ -1,6 +1,6 @@
 <?php
 /**
- * An extension for the Connections plugin which adds the ability to assign add and assign facilities to your business directory entries.
+ * An extension for the Connections Business Directory plugin which adds the ability to add and assign facilities to your business directory entries.
  *
  * @package   Connections Business Directory Facilities
  * @category  Extension
@@ -12,7 +12,7 @@
  * @wordpress-plugin
  * Plugin Name:       Connections Business Directory Facilities
  * Plugin URI:        http://connections-pro.com
- * Description:       An extension for the Connections plugin which adds the ability to assign add and assign facilities to your business directory entries.
+ * Description:       An extension for the Connections Business Directory plugin which adds the ability to add and assign facilities to your business directory entries.
  * Version:           1.0
  * Author:            Steven A. Zahm
  * Author URI:        http://connections-pro.com

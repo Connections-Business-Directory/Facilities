@@ -9,11 +9,11 @@ Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-An extension for the Connections plugin which adds the ability to assign add and assign facilities to your business directory entries.
+An extension for the Connections Business Directory plugin which adds the ability to add and assign facilities to your business directory entries.
 
 == Description ==
 
-This is an extension plugin for the [Connections Business Directory Plugin](http://wordpress.org/plugins/connections/) please be sure to install and active it before adding this plugin.
+This is an extension plugin for the [Connections Business Directory plugin](http://wordpress.org/plugins/connections/) please be sure to install and active it before adding this plugin.
 
 What does this plugin do? It adds the ability to add facilities and assign them to you business directory entries.
 

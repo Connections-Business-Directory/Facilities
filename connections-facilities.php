@@ -359,10 +359,10 @@ HEREDOC;
 				return;
 			}
 
-			$count      = count( $terms );
-			$html       = '';
-			$label      = '';
-			$items      = array();
+			$count = count( $terms );
+			$html  = '';
+			$label = '';
+			$items = array();
 
 			if ( 'list' == $atts['type'] ) {
 

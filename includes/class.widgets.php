@@ -103,13 +103,13 @@ class CN_Facilities_Widget extends WP_Widget {
 		if ( $slug =  cnQuery::getVar( 'cn-entry-slug' ) ) {
 
 			// Grab an instance of the Connections object.
-			$instance = Connections_Directory();
+			//$instance = Connections_Directory();
 
 			// Query the entry.
-			$result = $instance->retrieve->entries( array( 'slug' => urldecode( get_query_var( 'cn-entry-slug' ) ) ) );
+			$result = Connections_Directory()->retrieve->entry( urldecode( $slug ) );
 
 			// Setup the entry object
-			$entry = new cnEntry( $result[0] );
+			$entry = new cnEntry( $result );
 
 			/**
 			 * Extract $before_widget, $after_widget, $before_title and $after_title.

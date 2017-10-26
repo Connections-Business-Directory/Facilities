@@ -100,7 +100,7 @@ class CN_Facilities_Widget extends WP_Widget {
 	public function widget( $args, $option ) {
 
 		// Only process and display the widget if displaying a single entry.
-		if ( get_query_var( 'cn-entry-slug' ) ) {
+		if ( $slug =  cnQuery::getVar( 'cn-entry-slug' ) ) {
 
 			// Grab an instance of the Connections object.
 			$instance = Connections_Directory();

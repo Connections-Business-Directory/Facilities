@@ -111,14 +111,6 @@ class CN_Facilities_Widget extends WP_Widget {
 			// Setup the entry object
 			$entry = new cnEntry( $result[0] );
 
-			// Query the entry meta.
-			$metadata = $entry->getMeta( array( 'key' => 'facilities', 'single' => TRUE ) );
-
-			// If there is no meta; bail.
-			if ( empty( $metadata ) ) {
-				return;
-			}
-
 			/**
 			 * Extract $before_widget, $after_widget, $before_title and $after_title.
 			 *

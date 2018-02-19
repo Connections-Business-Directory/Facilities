@@ -3,7 +3,7 @@ Contributors: shazahm1@hotmail.com
 Donate link: http://connections-pro.com/
 Tags: business directory, facilities
 Requires at least: 4.4
-Tested up to: 4.8
+Tested up to: 4.9
 Requires PHP: 5.3
 Stable tag: 1.0
 License: GPLv2 or later

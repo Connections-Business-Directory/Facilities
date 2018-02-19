@@ -86,7 +86,10 @@ None yet...
 
 == Screenshots ==
 
-To be added after plugin approval...
+1. Add new business facility admin page.
+2. Assign facilities to business directory listing.
+3. Facility Content Block.
+4. Facility widget display.
 
 == Changelog ==
 

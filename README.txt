@@ -1,6 +1,6 @@
 === Connections Business Directory Facilities ===
 Contributors: shazahm1@hotmail.com
-Donate link: http://connections-pro.com/
+Donate link: https://connections-pro.com/
 Tags: business directory, directory, facilities
 Requires at least: 4.7.12
 Tested up to: 5.4

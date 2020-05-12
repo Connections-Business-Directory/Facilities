@@ -118,6 +118,38 @@ if ( ! class_exists( 'Connections_Facilities' ) ) {
 		}
 
 		/**
+		 * Register the taxonomy with the Gravity Forms Connector.
+		 *
+		 * @since 1.1
+		 *
+		 * @param array $taxonomy
+		 *
+		 * @return array
+		 */
+		public static function registerFacilitiesTaxonomy( $taxonomy ) {
+
+			$taxonomy['facility'] = array(
+				'labels' => array(
+					'name'          => _x(
+						'Facilities',
+						'Taxonomy field plural name.',
+						'connections_facilities'
+					),
+					'all_items'     => __( 'All Facilities', 'connections_facilities' ),
+					'select_items'  => __( 'Select Facilities', 'connections_facilities' ),
+					'singular_name' => _x(
+						'Facility',
+						'Taxonomy field singular name.',
+						'connections_facilities'
+					),
+					'field_label'   => __( 'Entry Facilities', 'connections_facilities' ),
+				),
+			);
+
+			return $taxonomy;
+		}
+
+		/**
 		 * The widget.
 		 *
 		 * @access private
@@ -729,5 +761,9 @@ HEREDOC;
 	 * we'll load with priority 11 so we know Connections will be loaded and ready first.
 	 */
 	add_action( 'plugins_loaded', 'Connections_Facilities', 11 );
+
+	// Support the Gravity Form Connector, register Facilities Taxonomy.
+	// NOTE: Must add filter before the `plugins_loaded` action.
+	add_filter( 'Connections_Directory\Connector\Gravity_Forms\Register_Taxonomy_Fields', array( 'Connections_Facilities', 'registerFacilitiesTaxonomy' ) );
 
 }

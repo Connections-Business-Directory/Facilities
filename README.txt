@@ -1,7 +1,7 @@
 === Connections Business Directory Facilities ===
 Contributors: shazahm1@hotmail.com
 Donate link: http://connections-pro.com/
-Tags: business directory, facilities
+Tags: business directory, directory, facilities
 Requires at least: 4.4
 Tested up to: 4.9
 Requires PHP: 5.3

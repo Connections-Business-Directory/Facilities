@@ -93,6 +93,20 @@ None yet...
 
 == Changelog ==
 
+= 1.1 05/12/2020 =
+* FEATURE: Add support for CSV Import/Export.
+* FEATURE: Add support for the Gravity Forms Connector.
+* TWEAK: Utilize `cnText_Domain` to load translations.
+* I18N: Add POT file.
+* I18N: Add German (Germany) translation.
+* OTHER: Update plugin naming to match current convention.
+* OTHER: Update copyright year.
+* OTHER: Update plugin tags.
+* OTHER: Bump "Tested up to" to version 5.4.
+* OTHER: Bump "Requires PHP" to version 5.6.20.
+* OTHER: Bump "Requires at least" to version 4.7.12.
+* OTHER: Update URLs to `https`.
+
 = 1.0 10/26/2017 =
 * Initial release.
 
@@ -100,3 +114,7 @@ None yet...
 
 = 1.0 =
 Initial release.
+
+= 1.1 =
+It is recommended to backup before updating. Requires WordPress >= 4.7.12 and PHP >= 5.6.20 PHP version >= 7.1 recommended.
+

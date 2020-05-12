@@ -90,6 +90,16 @@ if ( ! class_exists( 'Connections_Facilities' ) ) {
 			// Attach facilities to entry when saving an entry.
 			add_action( 'cn_process_taxonomy-category', array( __CLASS__, 'attachFacilities' ), 9, 2 );
 
+			// Add support for CSV Import.
+			add_filter( 'cncsv_map_import_fields', array( __CLASS__, 'import_field_option' ) );
+			add_action( 'cncsv_import_fields', array( __CLASS__, 'import_field' ), 10, 3 );
+
+			// Add support for CSV Export.
+			add_filter( 'cn_csv_export_fields_config', array( __CLASS__, 'export_field_config' ) );
+			add_filter( 'cn_csv_export_fields', array( __CLASS__, 'export_field_header' ) );
+			add_filter( 'cn_export_header-facilities', array( __CLASS__, 'export_header' ), 10, 3 );
+			add_filter( 'cn_export_field-facilities', array( __CLASS__, 'export_data' ), 10, 4 );
+
 			// Add the "Facilities" option to the admin settings page.
 			// This is also required so it'll be rendered by $entry->getContentBlock( 'facilities' ).
 			add_filter( 'cn_content_blocks', array( __CLASS__, 'settingsOption') );
@@ -289,6 +299,176 @@ HEREDOC;
 
 				$instance->term->setTermRelationships( $id, array(), 'facility' );
 			}
+		}
+
+		/**
+		 * Callback for the `cncsv_map_import_fields` filter.
+		 *
+		 * Add the field to the choices available to map to a CSV file field.
+		 *
+		 * @since 1.1
+		 *
+		 * @param array $fields
+		 *
+		 * @return array
+		 */
+		public static function import_field_option( $fields ) {
+
+			$fields['facilities'] = __( 'Facilities', 'connections_facilities' );
+
+			return $fields;
+		}
+
+		/**
+		 * Callback for the `cncsv_import_fields` action.
+		 *
+		 * Import facilities and attach them to the entry.
+		 *
+		 * @since 1.1
+		 *
+		 * @param int         $id    The entry ID.
+		 * @param array       $row   The parsed data from the CSV file.
+		 * @param cnCSV_Entry $entry An instance of the cnCSV_Entry object.
+		 */
+		public static function import_field( $id, $row, $entry ) {
+
+			$termIDs = array();
+
+			$parsed = $entry->arrayPull( $row, 'facilities', $termIDs );
+
+			if ( ! empty( $parsed ) ) {
+
+				/*
+				 * Convert the supplied facilities to an array and sanitize.
+				 * Apply the same filters added to the core WP default filters for `pre_term_name` so the facility name
+				 * will return a match if it exists.
+				 */
+				$facilities = explode( ',', $parsed );
+				$facilities = array_map( 'sanitize_text_field', $facilities );
+				$facilities = array_map( 'wp_filter_kses', $facilities );
+				$facilities = array_map( '_wp_specialchars', $facilities );
+
+				foreach ( $facilities as $facility ) {
+
+					// Query the db for the term to be added.
+					$term = cnTerm::getBy( 'name', $facility, 'facility' );
+
+					if ( $term instanceof cnTerm_Object ) {
+
+						$termIDs[] = $term->term_id;
+
+					} else {
+
+						// Add the new facility.
+						$insert_result = cnTerm::insert( $facility, 'facility', array( 'slug' => '', 'parent' => '0', 'description' => '' ) );
+
+						if ( ! is_wp_error( $insert_result ) ) {
+
+							$termIDs[] = $insert_result['term_id'];
+						}
+					}
+				}
+
+			}
+
+			// Do not set facilities relationships if $termIDs is empty because if updating, it will delete existing relationships.
+			if ( ! empty( $termIDs ) ) Connections_Directory()->term->setTermRelationships( $id, $termIDs, 'facility' );
+		}
+
+		/**
+		 * Callback for the `cn_csv_export_fields_config` filter.
+		 *
+		 * Add the facilities export configurations option to the export config.
+		 *
+		 * @since 1.1
+		 *
+		 * @param array $fields
+		 *
+		 * @return array
+		 */
+		public static function export_field_config( $fields ) {
+
+			$fields[] = array(
+				'field'  => 'facilities',
+				'type'   => 'facilities',
+				//'fields' => '',
+				//'table'  => CN_ENTRY_TABLE_META,
+				//'types'  => NULL,
+			);
+
+			return $fields;
+		}
+
+		/**
+		 * Callback for the `cn_csv_export_fields` filter.
+		 *
+		 * Set the column header name.
+		 *
+		 * @since 1.1
+		 *
+		 * @param array $fields
+		 *
+		 * @return array
+		 */
+		public static function export_field_header( $fields ) {
+
+			$fields['facilities'] = __( 'Facilities', 'connections_facilities' );
+
+			return $fields;
+		}
+
+		/**
+		 * Callback for the `cn_export_header-facilities` filter.
+		 *
+		 * Returns the CSV file header name for the Facilities column.
+		 *
+		 * @since 1.2
+		 *
+		 * @param string                 $header
+		 * @param array                  $atts
+		 * @param cnCSV_Batch_Export_All $export
+		 *
+		 * @return string
+		 */
+		public static function export_header( $header, $atts, $export ) {
+
+			return __( 'Facilities', 'connections_facilities' );
+		}
+
+		/**
+		 * Callback for the `cn_export_field-facilities` filter.
+		 *
+		 * Export the data.
+		 *
+		 * @since 1.2
+		 *
+		 * @param string                 $data
+		 * @param object                 $entry
+		 * @param array                  $field
+		 * @param cnCSV_Batch_Export_All $export
+		 *
+		 * @return string
+		 */
+		public static function export_data( $data, $entry, $field, $export ) {
+
+			$data = '';
+
+			// Process terms table and list all facilities in a single cell...
+			$names = array();
+
+			$terms = $export->getTerms( $entry->id, 'facility' );
+
+			foreach ( $terms as $term ) {
+
+				$names[] = $term->name;
+			}
+
+			if ( ! empty( $names ) ) {
+
+				$data = $export->escapeAndQuote( implode( ',', $names ) );
+			}
+
+			return $data;
 		}
 
 		/**

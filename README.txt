@@ -93,6 +93,13 @@ None yet...
 
 == Changelog ==
 
+= 1.1.1 05/06/2021 =
+* TWEAK: Remove use of `create_function()`.
+* OTHER: Update copyright year.
+* OTHER: Change link from `http` to `https`.
+* DEV: Correct code alignment.
+* DEV: phpDoc correction.
+
 = 1.1 05/12/2020 =
 * FEATURE: Add support for CSV Import/Export.
 * FEATURE: Add support for the Gravity Forms Connector.
@@ -117,4 +124,7 @@ Initial release.
 
 = 1.1 =
 It is recommended to backup before updating. Requires WordPress >= 4.7.12 and PHP >= 5.6.20 PHP version >= 7.1 recommended.
+
+= 1.1.1 =
+It is recommended to backup before updating. Requires WordPress >= 5.1 and PHP >= 5.6.20 PHP version >= 7.2 recommended.
 

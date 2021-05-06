@@ -13,7 +13,7 @@
  * Plugin Name:       Connections Business Directory Extension - Facilities
  * Plugin URI:        https://connections-pro.com/documentation/facilities/
  * Description:       An extension for the Connections Business Directory plugin which adds the ability to add and assign facilities to your business directory entries.
- * Version:           1.1
+ * Version:           1.1.1
  * Author:            Steven A. Zahm
  * Author URI:        https://connections-pro.com
  * License:           GPL-2.0+
@@ -31,7 +31,7 @@ if ( ! class_exists( 'Connections_Facilities' ) ) {
 
 	final class Connections_Facilities {
 
-		const VERSION = '1.1';
+		const VERSION = '1.1.1';
 
 		/**
 		 * @var string The absolute path this this file.

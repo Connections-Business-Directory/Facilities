@@ -1,5 +1,12 @@
 == Changelog ==
 
+= 1.1.1 05/06/2021 =
+* TWEAK: Remove use of `create_function()`.
+* OTHER: Update copyright year.
+* OTHER: Change link from `http` to `https`.
+* DEV: Correct code alignment.
+* DEV: phpDoc correction.
+
 = 1.1 05/12/2020 =
 * FEATURE: Add support for CSV Import/Export.
 * FEATURE: Add support for the Gravity Forms Connector.

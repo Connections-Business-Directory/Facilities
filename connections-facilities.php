@@ -734,7 +734,7 @@ HEREDOC;
 	 * @access public
 	 * @since 1.0
 	 *
-	 * @return mixed object | bool
+	 * @return Connections_Facilities|false
 	 */
 	function Connections_Facilities() {
 
